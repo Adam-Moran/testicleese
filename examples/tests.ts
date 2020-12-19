@@ -1,8 +1,20 @@
-import * as assert from 'assert';
+import assert = require('assert');
+import * as testicleese from '../src/index'
 
-describe("MyJSUtilities", function () {
+testicleese.describe("MyJSUtilities", () => {
  
-    it("should be able to lower case a string", function () {
+    testicleese.it("should be able to lower case a string", function () {
+        assert.ok(true);
+    });
+
+    testicleese.it("should be able to upper case a string", function () {
+        assert.ok(true);
+    });
+});
+
+testicleese.describe("MyJSUtilities2", () => {
+ 
+    testicleese.it("second Cat Test", function () {
         assert.ok(true);
     });
 });
