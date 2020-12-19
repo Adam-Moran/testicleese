@@ -8,7 +8,7 @@ testicleese.describe("MyJSUtilities", () => {
     });
 
     testicleese.it("should be able to upper case a string", function () {
-        assert.ok(true);
+        assert.ok(false);
     });
 });
 

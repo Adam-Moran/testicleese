@@ -1,18 +1,39 @@
-const testCategories: string[] = [];
-let currentCategory: string;
+let currentCategoryTests = new Map<string, test[]>();
+let currentTestCategory: string;
 
 export const describe = (title: string, testCategory: () => void): void => {
-  testCategories.push(title);
-
-  currentCategory = title;
-
+  currentTestCategory = title;
   testCategory();
-  
-  console.log(testCategories);
+
+  const tests = currentCategoryTests.get(currentTestCategory);
+  if(tests === undefined){
+    return; 
+  }
+
+  console.log(currentTestCategory);
+  for (const test of tests) {
+    try {
+      console.log(`   it ${test.title}`);
+      test.test();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 };
 
 export const it = (title: string, test: () => void): void => {
-  test();
+  const category = currentCategoryTests.get(currentTestCategory);
 
-  console.log(title, currentCategory);
+  if (category === undefined) {
+    currentCategoryTests.set(currentTestCategory, [{ title, test }]);
+
+    return;
+  }
+
+  category.push({title, test});
 };
+
+interface test {
+  title: string;
+  test: () => void;
+}
